@@ -1,14 +1,8 @@
 require_relative "billing"
-
+require_relative "grocery"
 class GroceryStore 
   def initialize 
     @grocery_orders = []
-    @PRODUCTS = {
-      milk: 3.97,
-      bread: 2.17,
-      banana: 0.99,
-      apple: 0.89
-    } 
   end
 
   def take_order 
@@ -25,7 +19,7 @@ class GroceryStore
   end
 
   def add_to_grocery_cart(ordered_items) 
-    @grocery_orders = ordered_items.select { |item|  !@PRODUCTS[item.to_sym].nil? }
+    @grocery_orders = ordered_items.select { |item|  !Grocery::PRODUCTS[item.to_sym].nil? }
     print_bill
   end
 

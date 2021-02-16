@@ -1,4 +1,5 @@
 require "terminal-table"
+require_relative "grocery"
 
 class Billing
   def initialize(orders)
@@ -29,8 +30,7 @@ class Billing
 
   def receipt
     total_amount, saved_amount = @orders.keys.reduce([0, 0]) do |amounts, item_name|
-      total_price = 0
-      saved_price = 0
+      total_price, saved_price = Grocery::PRODUCTS[item_name.to_sym].purchase(@orders[item_name])
       amounts[0] += total_price
       amounts[1] += saved_price
 
